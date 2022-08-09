@@ -1,24 +1,86 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useEffect, useState } from 'react'
+import Filter from './components/Filter';
+import Bar from './components/Bar';
+import Footer from './components/Footer';
+import Gallery from './components/Gallery';
+import styled from '@emotion/styled';
+
+
+
+const Container = styled.div`
+
+  width: min(95%, 1253px);
+  margin: 0 auto;
+  padding-top: 4.9rem;   
+
+  @media (max-width: 553px) {
+    padding-top: 2rem;
+  }
+  
+`;
+
 
 function App() {
+
+const [busqueda, guardarBusqueda] = useState([]);
+const [stays, guardarStays] = useState([]);
+const [mostrar, guardarMostrar] = useState(false);
+const [nadults, guardarnAdults] = useState(1);
+const [nkids, guardarnKids] = useState(0);
+const [nguests, guardarnGuests] = useState(0);
+
+
+  useEffect (() => {
+
+        const getStays = async () => {
+
+        console.log(busqueda)
+      
+
+        if (busqueda === '') return;
+
+              const response = await fetch("stays.json");
+              const resultado = await response.json();
+             
+              
+              guardarStays(resultado);
+          } 
+          getStays(); 
+        }, [busqueda]);
+  
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <Fragment>      
+      { mostrar ?               
+          <Filter 
+          mostrar = { mostrar } 
+          guardarMostrar = { guardarMostrar }
+          guardarBusqueda = {guardarBusqueda}
+          stays={stays}
+          nadults = { nadults}
+          guardarnAdults = {guardarnAdults}
+          nkids = {nkids}
+          guardarnKids = {guardarnKids}
+          nguests = {nguests}
+          guardarnGuests = {guardarnGuests}
+          />             
+        : null 
+      }  
+      <Container>
+          <Bar
+          mostrar = { mostrar } 
+          guardarMostrar = { guardarMostrar }
+          />
+          
+          <Gallery
+            stays={stays}
+          />
+          <Footer
+            autor='Salvador Sánchez'
+          />
+      </Container>
+    </Fragment>
   );
 }
 
