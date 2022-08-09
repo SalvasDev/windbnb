@@ -80,6 +80,15 @@ input:last-of-type::placeholder {
 }
 
 
+.no__results {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #EB5757;
+  margin: 4rem auto 2rem auto;
+  text-align: center;
+}
+
+
 
 footer {
   text-align: center;

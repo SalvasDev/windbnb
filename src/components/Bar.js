@@ -30,7 +30,9 @@ const Bar = ({mostrar, guardarMostrar}) => {
     return (
         <Barheader>
             <div className="logo">
-            <img src={logo} alt="Logo Windbnb" />
+                <a href="./index.html">
+                            <img href="#" src={logo} alt="Logo Windbnb" />
+                </a>
             </div>
             <div className="search-btn">
             <Search

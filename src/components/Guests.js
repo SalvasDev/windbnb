@@ -87,17 +87,42 @@ const restAdults = () => {
     
 }
 
+const addAdults = () => {
 
+    if (nadults === 20) return;
+    const nadultsActual = nadults + 1;
+    guardarnAdults(nadultsActual);
+    
+}
+
+const restKids = () => {
+
+    if (nkids === 0) return;
+    const nkidsActual = nkids - 1;
+    guardarnKids(nkidsActual);
+    
+}
+
+
+const addKids = () => {
+
+    if (nkids === 20) return;
+    const nkidsActual = nkids + 1;
+    guardarnKids(nkidsActual);
+    
+}
 
 
     return (  
         <Containguest>
+           
            <div className="groupguests">
            <p>Adults</p>
            <h3>Ages 13 or Above</h3> 
            <div className="row_edit">
                 <button
-                    onClick = {restAdults}
+                    onClick = {restAdults
+                    }
                 >
                     <span className="material-symbols-rounded">
                     remove
@@ -106,7 +131,9 @@ const restAdults = () => {
 
                 <span className="cant">{nadults}</span>
 
-                <button>
+                <button
+                    onClick = {addAdults}
+                >
                     <span className="material-symbols-rounded">
                     add
                     </span>
@@ -118,15 +145,19 @@ const restAdults = () => {
                 <p>Children</p>    
                 <h3>Ages 2 to 12 years</h3> 
                 <div className="row_edit">
-                    <button>
+                    <button
+                        onClick = {restKids}
+                    >
                         <span className="material-symbols-rounded">
                         remove
                         </span>
                     </button>
 
-                    <span className="cant">0</span>
+                    <span className="cant">{nkids}</span>
 
-                    <button>
+                    <button
+                    onClick = {addKids}
+                    >
                         <span className="material-symbols-rounded">
                         add
                         </span>

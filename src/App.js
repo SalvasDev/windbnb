@@ -30,25 +30,37 @@ const [nkids, guardarnKids] = useState(0);
 const [nguests, guardarnGuests] = useState(0);
 
 
+
+
+
   useEffect (() => {
 
         const getStays = async () => {
 
-        console.log(busqueda)
-      
 
         if (busqueda === '') return;
 
               const response = await fetch("stays.json");
               const resultado = await response.json();
-             
               
-              guardarStays(resultado);
+              
+              if ( busqueda.length === 0) {
+                  guardarStays(resultado); 
+                  return;
+              } else {
+                const filtStays = resultado.filter(resultado => (resultado.city === busqueda) && (resultado.maxGuests >= nguests));
+                guardarStays(filtStays);
+              }     
+
           } 
           getStays(); 
-        }, [busqueda]);
+
+        }, );
   
- 
+        
+    
+
+
   return (
     
     <Fragment>      

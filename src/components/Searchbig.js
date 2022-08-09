@@ -180,7 +180,7 @@ const Global = styled.div`
 
 
 
-const  Searchbig = ({stays, guardarBusqueda, nadults, guardarnAdults, nkids, guardarnKids, nguests, guardarnGuests}) => {
+const  Searchbig = ({mostrar, guardarMostrar, stays, guardarBusqueda, nadults, guardarnAdults, nkids, guardarnKids, nguests, guardarnGuests}) => {
 
     const [termino, guardarTermino] = useState('');
     const [error, guardarError] = useState(false);
@@ -192,31 +192,29 @@ const  Searchbig = ({stays, guardarBusqueda, nadults, guardarnAdults, nkids, gua
     const buscarStays = e => {
         e.preventDefault();
 
-        // Validar
+        // actualiza el número de huespedes
+          guardarnGuests(totalGuests)
 
+          //Cierra el filtro
+          guardarMostrar(false);
+
+        // Validar
         if (termino.trim() === '' ) {
             guardarError(true);
             return;
         }
         guardarError(false);
 
-   
-    
+       
     // Enviar el término de búsqueda hacia el componente principal
 
 
-    console.log((termino.split(" ")).length);
-
     if ((termino.split(" ")).length === 1) {
-        console.log(termino);
          guardarBusqueda(termino);
          return;
         } 
         guardarBusqueda((termino.split(' ').slice(0, -1).join(' '))
                     .substring(0, (termino.split(' ').slice(0, -1).join(' ')).length - 1))      
-                    
-                    
-  
     }
 
 
@@ -240,16 +238,21 @@ const  Searchbig = ({stays, guardarBusqueda, nadults, guardarnAdults, nkids, gua
             return;
           }
           guardarMostrarGuests(false);
+          
         }
-        
 
+
+        const  totalGuests = nadults + nkids;
+
+        
 
 
     return (
       <Global>
+
         <p className="edit__title">Edit your search</p>
         <form
-            onSubmit = {buscarStays}
+            onSubmit = {buscarStays} 
           >
         <div className="Searchbtn">           
 
@@ -274,7 +277,9 @@ const  Searchbig = ({stays, guardarBusqueda, nadults, guardarnAdults, nkids, gua
             <input
                 className="input-guests"
                 type="text"
+                value={totalGuests}
                 placeholder='Add guests'
+                onChange={(e) => guardarnGuests(e.target.value)}
                 onClick= { (e) => {
                      mostrarDetallesGuests(true, e)
                      mostrarDetallesLoc(false, e);
@@ -285,9 +290,10 @@ const  Searchbig = ({stays, guardarBusqueda, nadults, guardarnAdults, nkids, gua
 
             <div className="group3">
             <div className="contsearch">
-                 <button 
-                 className="btnsearch"
-                 type='submit'>
+                <button 
+                    className="btnsearch"
+                    type='submit'
+                    >
                     <span className="material-symbols-rounded search__class">
                     search
                     </span>Search

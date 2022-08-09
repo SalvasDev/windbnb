@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Card from './Card';
 import styled from '@emotion/styled';
-
+// import Noresults from './Noresults';
 
 
 const Contgallery = styled.div`
@@ -36,18 +36,17 @@ const Title = styled.div`
 `;
 
 const Gallery = ({stays}) => {
-    
-   const { country } = stays;
-
+  
 
    return ( 
    <Fragment>
         <Title>       
-              <h1>Stays in {country} </h1>
+              <h1>Stays in Finland </h1>
               <p>{stays.length}+stays</p>
           </Title>
-      
-        <Contgallery>
+         {/* {  (stays.length === 0) ? <Noresults mensaje='We did not find any results, tray again please'/> : null} */}
+
+        <Contgallery>                      
             { stays.map( stays => (
                 <Card
                     key={stays.photo}

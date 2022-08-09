@@ -86,7 +86,7 @@ const agregaTermino = (e, valor) => {
 
                 <button
                 className="btnLoc"
-                onClick= { (e) => {agregaTermino(e, 'Olulu, Finland')}}
+                onClick= { (e) => {agregaTermino(e, 'Oulu, Finland')}}
                 >
                 <span className="material-symbols-rounded">location_on</span>  Oulu, Finland</button>
 
